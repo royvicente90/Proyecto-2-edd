@@ -5,16 +5,25 @@
  */
 package Proyecto2;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 /**
  *
  * @author royvi
  */
 public class Main {
     
-    public static void main(String [] args) {
+    public static void main(String [] args) throws FileNotFoundException, IOException {
         
         
-        System.out.println("Hola Mundo");
+        System.out.println("-- Inicializando programa --");
+        Arbol nuevoArbol = new Arbol();
+        nuevoArbol.leerDatos();
+        nuevoArbol.cargarDatos();
+        MainModal newModal = new MainModal(nuevoArbol);
+        newModal.setVisible(true);
         
     }
     
