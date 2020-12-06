@@ -6,6 +6,9 @@
 package Proyecto2;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -300,8 +303,11 @@ public class MainModal extends javax.swing.JFrame {
 
     private void botonGuardarEnArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGuardarEnArchivoActionPerformed
         // TODO add your handling code here:
-        String nuevoArbol = this.arbol.imprimirParaArchivo();
-        JOptionPane.showMessageDialog(null,nuevoArbol);
+        try {
+            this.arbol.cargarDatos();
+        } catch (IOException ex) {
+            Logger.getLogger(MainModal.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_botonGuardarEnArchivoActionPerformed
 
     /**

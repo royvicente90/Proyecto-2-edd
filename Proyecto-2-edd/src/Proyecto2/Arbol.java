@@ -152,6 +152,7 @@ public class Arbol {
         FileWriter writer = new FileWriter(archivoDeArbol);
         writer.write(arbolEnString);
         writer.close();
+        JOptionPane.showMessageDialog(null,"Archivo TXT actualizado exitosamente!");
         
     }
     
