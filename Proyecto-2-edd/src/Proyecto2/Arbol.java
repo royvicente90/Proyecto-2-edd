@@ -37,7 +37,7 @@ public class Arbol {
     }
     
     public String imprimir(){
-        String arbol = "";
+        String arbol = "-- MI ARBOL ADIVINADOR --\n\n";
         
         if(this.raiz == null){
             arbol = "El arbol esta vacio";
@@ -50,7 +50,7 @@ public class Arbol {
             while(!porVisitar.esVacia()){
                 navegador = porVisitar.sacaDelPrincipio();
                 if(navegador.getHijoAfirmativo() != null && navegador.getHijoNegativo() != null){
-                    arbol += "["+navegador.getValor() + "] | Si es Negativo-> ["+navegador.getHijoNegativo().getValor()+"] | Si es Afirmativo -> ["+navegador.getHijoAfirmativo().getValor()+"]\n";
+                    arbol += "Nodo -> ["+navegador.getValor() + "] | Si es Negativo-> ["+navegador.getHijoNegativo().getValor()+"] | Si es Afirmativo -> ["+navegador.getHijoAfirmativo().getValor()+"]\n";
                     
                     //Agregar los hijos a la lista
                     porVisitar.agregarAlFinal(navegador.getHijoAfirmativo());
@@ -81,7 +81,17 @@ public class Arbol {
                 navegador = porVisitar.sacaDelPrincipio();
                 if(navegador.getHijoAfirmativo() != null && navegador.getHijoNegativo() != null){
                     
-                    arbol+=navegador.getPadre().getValor()+","+navegador.getValor()+","+navegador.getHijoNegativo().getValor()+","+navegador.getHijoAfirmativo().getValor()+"\n";   
+                    if(navegador.getPadre() == null){
+                        arbol+=","+navegador.getValor()+","+navegador.getHijoNegativo().getValor()+","+navegador.getHijoAfirmativo().getValor()+"\n";   
+                    }
+                    else{
+                        arbol+=navegador.getPadre().getValor()+","+navegador.getValor()+","+navegador.getHijoNegativo().getValor()+","+navegador.getHijoAfirmativo().getValor()+"\n";   
+                
+                    }
+                    
+                    //Agregamos nuevos nodos a visitar
+                    porVisitar.agregarAlFinal(navegador.getHijoAfirmativo());
+                    porVisitar.agregarAlFinal(navegador.getHijoNegativo());
                 }
             }
         }
@@ -137,7 +147,7 @@ public class Arbol {
     }
     
     public void cargarDatos() throws IOException{
-        String arbolEnString = this.imprimir();
+        String arbolEnString = this.imprimirParaArchivo();
         File archivoDeArbol = new File("test/arbol.txt");
         FileWriter writer = new FileWriter(archivoDeArbol);
         writer.write(arbolEnString);

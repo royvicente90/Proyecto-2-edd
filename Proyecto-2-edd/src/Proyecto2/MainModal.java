@@ -242,9 +242,13 @@ public class MainModal extends javax.swing.JFrame {
             }
             botonGuardarEnArchivo.setEnabled(true);
             JOptionPane.showMessageDialog(null, "Arbol modificado, puede guardar los cambios en el txt presionando el boton Guardar Archivo");
+            
+            //Configurar una nueva sesion
             navegador = arbol.getRaiz();
             actividad += "\n-- NUEVA SESION --\n";
             historialDePreguntas.setText(actividad);
+            labelPregunta.setText("El animal "+navegador.getValor()+ "?");
+            
         }
         else{
             //Siguen las preguntas
@@ -270,7 +274,11 @@ public class MainModal extends javax.swing.JFrame {
         this.actividad += "Si!\n";
         historialDePreguntas.setText(actividad);
         if(navegador.esHoja()){
-            JOptionPane.showMessageDialog(null,"Hemos adivinado tu animal!");            
+            JOptionPane.showMessageDialog(null,"Hemos adivinado tu animal!");   
+            navegador = arbol.getRaiz();
+            actividad += "\n-- NUEVA SESION --\n";
+            historialDePreguntas.setText(actividad);
+            labelPregunta.setText("El animal "+navegador.getValor()+ "?");
         }
         else{
             if(navegador.getHijoAfirmativo().esHoja()){
@@ -292,6 +300,8 @@ public class MainModal extends javax.swing.JFrame {
 
     private void botonGuardarEnArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGuardarEnArchivoActionPerformed
         // TODO add your handling code here:
+        String nuevoArbol = this.arbol.imprimirParaArchivo();
+        JOptionPane.showMessageDialog(null,nuevoArbol);
     }//GEN-LAST:event_botonGuardarEnArchivoActionPerformed
 
     /**
