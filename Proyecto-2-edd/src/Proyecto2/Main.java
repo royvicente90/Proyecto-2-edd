@@ -20,8 +20,6 @@ public class Main {
         
         System.out.println("-- Inicializando programa --");
         Arbol nuevoArbol = new Arbol();
-        nuevoArbol.leerDatos();
-        nuevoArbol.cargarDatos();
         MainModal newModal = new MainModal(nuevoArbol);
         newModal.setVisible(true);
         

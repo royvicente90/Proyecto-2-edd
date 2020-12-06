@@ -11,13 +11,14 @@ package Proyecto2;
  */
 public class NodoArbol {
     String valor;
-    NodoArbol hijoAfirtmativo;
+    NodoArbol hijoAfirmativo;
     NodoArbol hijoNegativo;
     NodoArbol padre;
+    NodoArbol siguiente;
     
     public NodoArbol(String pregunta){
         this.valor = pregunta;
-        this.hijoAfirtmativo = null;
+        this.hijoAfirmativo = null;
         this.hijoNegativo =null;
         this.padre = null; 
     }
@@ -30,12 +31,12 @@ public class NodoArbol {
         this.valor = valor;
     }
 
-    public NodoArbol getHijoAfirtmativo() {
-        return hijoAfirtmativo;
+    public NodoArbol getHijoAfirmativo() {
+        return hijoAfirmativo;
     }
 
-    public void setHijoAfirtmativo(NodoArbol hijoAfirtmativo) {
-        this.hijoAfirtmativo = hijoAfirtmativo;
+    public void setHijoAfirmativo(NodoArbol hijoAfirtmativo) {
+        this.hijoAfirmativo = hijoAfirtmativo;
     }
 
     public NodoArbol getHijoNegativo() {
@@ -53,9 +54,17 @@ public class NodoArbol {
     public void setPadre(NodoArbol padre) {
         this.padre = padre;
     }
+
+    public NodoArbol getSiguiente() {
+        return siguiente;
+    }
+
+    public void setSiguiente(NodoArbol siguiente) {
+        this.siguiente = siguiente;
+    }
     
-    
-    
-    
+    public boolean esHoja(){
+        return this.hijoAfirmativo == null && this.hijoNegativo == null;
+    }
     
 }

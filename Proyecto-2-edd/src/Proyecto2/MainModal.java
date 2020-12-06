@@ -5,12 +5,17 @@
  */
 package Proyecto2;
 
+import java.io.FileNotFoundException;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author andresespinoza
  */
 public class MainModal extends javax.swing.JFrame {
     Arbol arbol;
+    String actividad;
+    NodoArbol navegador;
     /**
      * Creates new form MainModal
      */
@@ -18,9 +23,16 @@ public class MainModal extends javax.swing.JFrame {
         initComponents();
     }
     
-    public MainModal(Arbol nuevoArbol){
+    public MainModal(Arbol nuevoArbol) throws FileNotFoundException{
         this.arbol = nuevoArbol;
         initComponents();
+        arbol.leerDatos();
+        String arbolImpreso = arbol.imprimir();
+        botonSi.setVisible(false);
+        botonNo.setVisible(false);
+        this.actividad = "";
+        this.navegador = arbol.getRaiz();
+        
     }
 
     /**
@@ -40,7 +52,7 @@ public class MainModal extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         botonGuardarEnArchivo = new javax.swing.JButton();
         botonNuevaSesion = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
+        labelPregunta = new javax.swing.JLabel();
         botonNo = new javax.swing.JButton();
         botonSi = new javax.swing.JButton();
 
@@ -71,8 +83,8 @@ public class MainModal extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Preguntas van a ir aqui");
+        labelPregunta.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelPregunta.setText("Inicia una nueva sesion para comenzar!");
 
         botonNo.setText("No");
         botonNo.addActionListener(new java.awt.event.ActionListener() {
@@ -94,48 +106,50 @@ public class MainModal extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 516, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 559, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(52, 52, 52)
+                        .addComponent(labelPregunta, javax.swing.GroupLayout.PREFERRED_SIZE, 516, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(60, 60, 60)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(141, 141, 141)
+                                .addGap(75, 75, 75)
                                 .addComponent(jLabel1))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(66, 66, 66)
                                 .addComponent(botonNuevaSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(botonGuardarEnArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(47, 47, 47)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 508, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(botonGuardarEnArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(219, 219, 219)
+                        .addGap(217, 217, 217)
                         .addComponent(botonSi)
                         .addGap(18, 18, 18)
                         .addComponent(botonNo)))
-                .addContainerGap(81, Short.MAX_VALUE))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
+                .addGap(30, 30, 30)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botonNuevaSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(botonGuardarEnArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(54, 54, 54)
-                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addComponent(labelPregunta)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botonNo, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(botonSi, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
+                .addGap(29, 29, 29)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(39, 39, 39))
         );
 
@@ -160,15 +174,62 @@ public class MainModal extends javax.swing.JFrame {
     }//GEN-LAST:event_botonGuardarEnArchivoActionPerformed
 
     private void botonNuevaSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonNuevaSesionActionPerformed
-        // TODO add your handling code here:
+        botonSi.setVisible(true);
+        botonNo.setVisible(true);
+        labelPregunta.setText("El animal "+navegador.getValor()+ "?");
+        this.actividad += labelPregunta.getText()+"\n";
+        historialDePreguntas.setText(actividad);
+        
     }//GEN-LAST:event_botonNuevaSesionActionPerformed
 
     private void botonNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonNoActionPerformed
         // TODO add your handling code here:
+        this.actividad += "No!\n";
+        historialDePreguntas.setText(actividad);
+        if(navegador.esHoja()){
+            JOptionPane.showMessageDialog(null,"Dinos como tenemos que mejorar!");
+        }
+        else{
+            //Siguen las preguntas
+            if(navegador.getHijoNegativo().esHoja()){
+                navegador = navegador.getHijoNegativo();
+                labelPregunta.setText("Tu animal es "+navegador.getValor()+ "?");
+                this.actividad += labelPregunta.getText()+"\n";
+                historialDePreguntas.setText(actividad);
+            }
+            else{
+                navegador = navegador.getHijoNegativo();
+                labelPregunta.setText("El animal "+navegador.getValor()+ "?");
+                this.actividad += labelPregunta.getText()+"\n";
+                historialDePreguntas.setText(actividad);
+            }
+        }
+        
     }//GEN-LAST:event_botonNoActionPerformed
 
     private void botonSiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSiActionPerformed
         // TODO add your handling code here:
+        this.actividad += "Si!\n";
+        historialDePreguntas.setText(actividad);
+        if(navegador.esHoja()){
+            JOptionPane.showMessageDialog(null,"Hemos adivinado tu animal!");
+        }
+        else{
+            if(navegador.getHijoAfirmativo().esHoja()){
+                navegador = navegador.getHijoAfirmativo();
+                labelPregunta.setText("El animal es "+navegador.getValor()+ "?");
+                this.actividad += labelPregunta.getText()+"\n";
+                historialDePreguntas.setText(actividad);
+            }
+            else{
+                navegador = navegador.getHijoAfirmativo();
+                labelPregunta.setText("El animal "+navegador.getValor()+ "?");
+                this.actividad += labelPregunta.getText()+"\n";
+                historialDePreguntas.setText(actividad);
+            }
+        }
+        
+        
     }//GEN-LAST:event_botonSiActionPerformed
 
     /**
@@ -215,8 +276,8 @@ public class MainModal extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel labelPregunta;
     // End of variables declaration//GEN-END:variables
 }
