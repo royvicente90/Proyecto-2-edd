@@ -129,7 +129,7 @@ public class MainModal extends javax.swing.JFrame {
                         .addComponent(botonSi)
                         .addGap(18, 18, 18)
                         .addComponent(botonNo)))
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -157,9 +157,7 @@ public class MainModal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 632, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 35, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -176,6 +174,8 @@ public class MainModal extends javax.swing.JFrame {
     private void botonNuevaSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonNuevaSesionActionPerformed
         botonSi.setVisible(true);
         botonNo.setVisible(true);
+        actividad = "";
+        navegador = arbol.getRaiz();
         labelPregunta.setText("El animal "+navegador.getValor()+ "?");
         this.actividad += labelPregunta.getText()+"\n";
         historialDePreguntas.setText(actividad);
@@ -212,7 +212,7 @@ public class MainModal extends javax.swing.JFrame {
         this.actividad += "Si!\n";
         historialDePreguntas.setText(actividad);
         if(navegador.esHoja()){
-            JOptionPane.showMessageDialog(null,"Hemos adivinado tu animal!");
+            JOptionPane.showMessageDialog(null,"Hemos adivinado tu animal!");            
         }
         else{
             if(navegador.getHijoAfirmativo().esHoja()){
