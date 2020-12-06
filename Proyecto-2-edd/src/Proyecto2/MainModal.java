@@ -66,6 +66,7 @@ public class MainModal extends javax.swing.JFrame {
         jFormattedTextField1.setText("jFormattedTextField1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
         jLabel1.setText("Bienvenido Al Adivinador de Animales");
@@ -182,21 +183,10 @@ public class MainModal extends javax.swing.JFrame {
                 .addGap(72, 72, 72))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 6, -1, -1));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonVerArbolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonVerArbolActionPerformed
@@ -235,10 +225,9 @@ public class MainModal extends javax.swing.JFrame {
             }
             if(!animalExistente){
                 boolean existente = true;
-                String nuevaPregunta = "";
                 
                 //Las preguntas SI se pueden repetir, porque no son caracteristicas unicas
-                nuevaPregunta = JOptionPane.showInputDialog("Que diferencia a un "+navegador.getValor() + " de un "+animal+"?").toLowerCase();
+                String nuevaPregunta = JOptionPane.showInputDialog("Que diferencia a un "+navegador.getValor() + " de un "+animal+"?").toLowerCase();
                 
                 //Creo un nodo con el animal (Nodo hoja)
                 NodoArbol nuevaHoja = new NodoArbol(animal);
