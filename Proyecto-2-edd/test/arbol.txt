@@ -1,5 +1,1 @@
-,vuela,ladra,caza
-vuela,ladra,tiene colmillos,perro
-vuela,caza,come carrona,aguila
-ladra,tiene colmillos,raton,elefante
-caza,come carrona,pajaro,buitre
+,vuela,perro, aguila

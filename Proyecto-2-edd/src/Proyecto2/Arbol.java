@@ -156,6 +156,15 @@ public class Arbol {
         
     }
     
+    public void resetearDatos() throws IOException{
+        String arbolReseteado = ",vuela,perro, aguila\n";
+        File archivoDeArbol = new File("test/arbol.txt");
+        FileWriter writer = new FileWriter(archivoDeArbol);
+        writer.write(arbolReseteado);
+        writer.close();
+        JOptionPane.showMessageDialog(null,"Archivo TXT reseteado exitosamente!");
+    }
+    
     public void leerDatos() throws FileNotFoundException{
         File archivoDeArbol = new File("test/arbol.txt");
         Scanner scan = new Scanner(archivoDeArbol);

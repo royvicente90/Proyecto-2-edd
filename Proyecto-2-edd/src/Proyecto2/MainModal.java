@@ -61,6 +61,7 @@ public class MainModal extends javax.swing.JFrame {
         botonNo = new javax.swing.JButton();
         botonSi = new javax.swing.JButton();
         botonGuardarEnArchivo = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         jFormattedTextField1.setText("jFormattedTextField1");
 
@@ -113,6 +114,13 @@ public class MainModal extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Resetear Arbol");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -131,7 +139,7 @@ public class MainModal extends javax.swing.JFrame {
                                 .addComponent(botonGuardarEnArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(31, 31, 31)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 559, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -141,10 +149,11 @@ public class MainModal extends javax.swing.JFrame {
                                 .addGap(182, 182, 182)
                                 .addComponent(botonSi)
                                 .addGap(18, 18, 18)
-                                .addComponent(botonNo))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(175, 175, 175)
-                        .addComponent(botonVerArbol, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(botonNo))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(botonVerArbol, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(91, 91, 91)
+                                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                 .addContainerGap(42, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -166,9 +175,11 @@ public class MainModal extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
-                .addComponent(botonVerArbol, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25))
+                .addGap(49, 49, 49)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botonVerArbol, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(72, 72, 72))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -179,7 +190,6 @@ public class MainModal extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -305,10 +315,33 @@ public class MainModal extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             this.arbol.cargarDatos();
+            this.arbol.leerDatos();
         } catch (IOException ex) {
             Logger.getLogger(MainModal.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_botonGuardarEnArchivoActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        int confirmacion = JOptionPane.showConfirmDialog(null,"Esta seguro que quiere resetar el arbol?\nTodos los datos menos la primera pregunta seran eliminados","Confirmacion de eliminacion del arbol",JOptionPane.YES_NO_OPTION);
+        if(confirmacion == JOptionPane.YES_OPTION){
+            try {
+                this.arbol.resetearDatos();
+            } catch (IOException ex) {
+                Logger.getLogger(MainModal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            this.actividad = "-- NUEVA SESION CON ARBOL REINICIADO --\n\n";
+            Arbol nuevoArbol = new Arbol();
+            try {
+                nuevoArbol.leerDatos();
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(MainModal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            this.arbol = nuevoArbol;
+            navegador = this.arbol.getRaiz();
+            historialDePreguntas.setText(actividad);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -352,6 +385,7 @@ public class MainModal extends javax.swing.JFrame {
     private javax.swing.JButton botonSi;
     private javax.swing.JButton botonVerArbol;
     private javax.swing.JTextArea historialDePreguntas;
+    private javax.swing.JButton jButton1;
     private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
