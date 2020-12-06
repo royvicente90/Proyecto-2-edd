@@ -1,8 +1,5 @@
-,a,b,e
-a,e,f,p
-a,b,c,d
-e,p,g,q
-e,f,j,n
-b,c,h,l
-f,n,k,o
-c,l,m,i
+,vuela,ladra,caza
+vuela,ladra,tiene colmillos,perro
+vuela,caza,come carrona,aguila
+ladra,tiene colmillos,raton,elefante
+caza,come carrona,pajaro,buitre

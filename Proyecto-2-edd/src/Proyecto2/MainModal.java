@@ -218,7 +218,7 @@ public class MainModal extends javax.swing.JFrame {
             NodoArbol pregunta = new NodoArbol(nuevaPregunta);
             
             //Veo cual es la opcion positiva y negativa
-            int respuesta = JOptionPane.showConfirmDialog(null,"El animal "+navegador.getValor()+" "+pregunta.getValor()+"?", "Seleccione si o no",JOptionPane.YES_NO_OPTION);
+            int respuesta = JOptionPane.showConfirmDialog(null,"El "+navegador.getValor()+" "+pregunta.getValor()+"?", "Seleccione si o no",JOptionPane.YES_NO_OPTION);
             
             //Configuramos los nuevos nodos hoja segun la confirmacion del usuario
             if(respuesta == JOptionPane.YES_OPTION){
@@ -277,7 +277,7 @@ public class MainModal extends javax.swing.JFrame {
         this.actividad += "Si!\n";
         historialDePreguntas.setText(actividad);
         if(navegador.esHoja()){
-            JOptionPane.showMessageDialog(null,"Hemos adivinado tu animal!");   
+            JOptionPane.showMessageDialog(null,"Hemos adivinado que tu anima es "+navegador.getValor()+"!");   
             navegador = arbol.getRaiz();
             actividad += "\n-- NUEVA SESION --\n";
             historialDePreguntas.setText(actividad);
