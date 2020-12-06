@@ -50,20 +50,41 @@ public class Arbol {
             while(!porVisitar.esVacia()){
                 navegador = porVisitar.sacaDelPrincipio();
                 if(navegador.getHijoAfirmativo() != null && navegador.getHijoNegativo() != null){
-                    arbol += "["+navegador.getValor() + "] | Negativo-> ["+navegador.getHijoNegativo().getValor()+"] | Hijo Afirmativo -> ["+navegador.getHijoAfirmativo().getValor()+"]\n";
+                    arbol += "["+navegador.getValor() + "] | Si es Negativo-> ["+navegador.getHijoNegativo().getValor()+"] | Si es Afirmativo -> ["+navegador.getHijoAfirmativo().getValor()+"]\n";
                     
                     //Agregar los hijos a la lista
                     porVisitar.agregarAlFinal(navegador.getHijoAfirmativo());
                     porVisitar.agregarAlFinal(navegador.getHijoNegativo());
                     
                 }
-                else{
-                    arbol += "["+navegador.getValor()+"] | Nodo hoja\n";
-                }
+//                else{
+//                    arbol += "["+navegador.getValor()+"] | Animal\n";
+//                }
             }
             
         }
         
+        return arbol;
+    }
+    
+    public String imprimirParaArchivo(){
+        String arbol = "";
+        if(this.raiz == null){
+            arbol+=",,,\n";
+        }
+        else{
+            //Comienza el recorrido por el arbol
+            Lista porVisitar = new Lista();
+            porVisitar.agregarAlFinal(this.raiz);
+            NodoArbol navegador;
+            while(!porVisitar.esVacia()){
+                navegador = porVisitar.sacaDelPrincipio();
+                if(navegador.getHijoAfirmativo() != null && navegador.getHijoNegativo() != null){
+                    
+                    arbol+=navegador.getPadre().getValor()+","+navegador.getValor()+","+navegador.getHijoNegativo().getValor()+","+navegador.getHijoAfirmativo().getValor()+"\n";   
+                }
+            }
+        }
         return arbol;
     }
     
