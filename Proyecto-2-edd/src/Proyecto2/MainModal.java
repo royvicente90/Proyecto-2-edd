@@ -220,65 +220,84 @@ public class MainModal extends javax.swing.JFrame {
         this.actividad += "No!\n";
         historialDePreguntas.setText(actividad);
         if(navegador.esHoja()){
-            String animal = JOptionPane.showInputDialog("Cual era tu animal?");
-            String nuevaPregunta = JOptionPane.showInputDialog("Que diferencia a un "+navegador.getValor() + " de un "+animal+"?");
-            NodoArbol nuevaHoja = new NodoArbol(animal);
-            
-            //Creo una nueva pregunta
-            NodoArbol pregunta = new NodoArbol(nuevaPregunta);
-            
-            //Veo cual es la opcion positiva y negativa
-            int respuesta = JOptionPane.showConfirmDialog(null,"El "+navegador.getValor()+" "+pregunta.getValor()+"?", "Seleccione si o no",JOptionPane.YES_NO_OPTION);
-            
-            //Configuramos los nuevos nodos hoja segun la confirmacion del usuario
-            if(respuesta == JOptionPane.YES_OPTION){
-                pregunta.setHijoAfirmativo(navegador);
-                pregunta.setHijoNegativo(nuevaHoja);
-                pregunta.setPadre(navegador.getPadre());
-                nuevaHoja.setPadre(pregunta);
-            }
-            else if(respuesta == JOptionPane.NO_OPTION){
-                pregunta.setHijoNegativo(navegador);
-                pregunta.setHijoAfirmativo(nuevaHoja);
-                pregunta.setPadre(navegador.getPadre());
-                nuevaHoja.setPadre(pregunta);
-            }
-            
-            //La integro en el arbol
-            if(navegador.getPadre().getHijoAfirmativo() == navegador){
-                navegador.getPadre().setHijoAfirmativo(pregunta);
-                navegador.setPadre(pregunta);
+            boolean animalExistente = true;
+            String animal = JOptionPane.showInputDialog("Cual era tu animal?").toLowerCase();
+            NodoArbol animalExiste = this.arbol.getNodoPorValor(animal);
+            if(animalExiste == null){
+                animalExistente = false;
             }
             else{
-                navegador.getPadre().setHijoNegativo(pregunta);
-                navegador.setPadre(pregunta);
-            }
-            botonGuardarEnArchivo.setEnabled(true);
-            JOptionPane.showMessageDialog(null, "Arbol modificado, puede guardar los cambios en el txt presionando el boton Guardar Archivo");
-            
-            //Configurar una nueva sesion
-            navegador = arbol.getRaiz();
-            actividad += "\n-- NUEVA SESION --\n";
-            historialDePreguntas.setText(actividad);
-            labelPregunta.setText("El animal "+navegador.getValor()+ "?");
-            
-        }
-        else{
-            //Siguen las preguntas
-            if(navegador.getHijoNegativo().esHoja()){
-                navegador = navegador.getHijoNegativo();
-                labelPregunta.setText("Tu animal es "+navegador.getValor()+ "?");
-                this.actividad += labelPregunta.getText()+"\n";
+                JOptionPane.showMessageDialog(null, "El animal "+ animal+" ya existe en el registro, porfavor intentelo de nuevo o resetee el arbol si las preguntas no son adecuadas");
+                navegador = arbol.getRaiz();
+                actividad += "\n-- NUEVA SESION --\n";
                 historialDePreguntas.setText(actividad);
-            }
-            else{
-                navegador = navegador.getHijoNegativo();
                 labelPregunta.setText("El animal "+navegador.getValor()+ "?");
-                this.actividad += labelPregunta.getText()+"\n";
-                historialDePreguntas.setText(actividad);
             }
-            
-        }
+            if(!animalExistente){
+                boolean existente = true;
+                String nuevaPregunta = "";
+                
+                //Las preguntas SI se pueden repetir, porque no son caracteristicas unicas
+                nuevaPregunta = JOptionPane.showInputDialog("Que diferencia a un "+navegador.getValor() + " de un "+animal+"?").toLowerCase();
+                
+                //Creo un nodo con el animal (Nodo hoja)
+                NodoArbol nuevaHoja = new NodoArbol(animal);
+
+                //Creo una nueva pregunta
+                NodoArbol pregunta = new NodoArbol(nuevaPregunta);
+
+                //Veo cual es la opcion positiva y negativa
+                int respuesta = JOptionPane.showConfirmDialog(null,"El "+navegador.getValor()+" "+pregunta.getValor()+"?", "Seleccione si o no",JOptionPane.YES_NO_OPTION);
+
+                //Configuramos los nuevos nodos hoja segun la confirmacion del usuario
+                if(respuesta == JOptionPane.YES_OPTION){
+                    pregunta.setHijoAfirmativo(navegador);
+                    pregunta.setHijoNegativo(nuevaHoja);
+                    pregunta.setPadre(navegador.getPadre());
+                    nuevaHoja.setPadre(pregunta);
+                }
+                else if(respuesta == JOptionPane.NO_OPTION){
+                    pregunta.setHijoNegativo(navegador);
+                    pregunta.setHijoAfirmativo(nuevaHoja);
+                    pregunta.setPadre(navegador.getPadre());
+                    nuevaHoja.setPadre(pregunta);
+                }
+
+                //La integro en el arbol
+                if(navegador.getPadre().getHijoAfirmativo() == navegador){
+                    navegador.getPadre().setHijoAfirmativo(pregunta);
+                    navegador.setPadre(pregunta);
+                }
+                else{
+                    navegador.getPadre().setHijoNegativo(pregunta);
+                    navegador.setPadre(pregunta);
+                }
+                botonGuardarEnArchivo.setEnabled(true);
+                JOptionPane.showMessageDialog(null, "Arbol modificado, puede guardar los cambios en el txt presionando el boton Guardar Archivo");
+
+                //Configurar una nueva sesion
+                navegador = arbol.getRaiz();
+                actividad += "\n-- NUEVA SESION --\n";
+                historialDePreguntas.setText(actividad);
+                labelPregunta.setText("El animal "+navegador.getValor()+ "?");
+              } 
+            }
+            else{
+                //Siguen las preguntas
+                if(navegador.getHijoNegativo().esHoja()){
+                    navegador = navegador.getHijoNegativo();
+                    labelPregunta.setText("Tu animal es "+navegador.getValor()+ "?");
+                    this.actividad += labelPregunta.getText()+"\n";
+                    historialDePreguntas.setText(actividad);
+                }
+                else{
+                    navegador = navegador.getHijoNegativo();
+                    labelPregunta.setText("El animal "+navegador.getValor()+ "?");
+                    this.actividad += labelPregunta.getText()+"\n";
+                    historialDePreguntas.setText(actividad);
+                }
+
+            }
         
     }//GEN-LAST:event_botonNoActionPerformed
 
